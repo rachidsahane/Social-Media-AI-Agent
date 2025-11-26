@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "Social Media Manager",
+  "version": "1.0.0",
+  "description": "AI-powered social media management tool for generating comments, post ideas, and managing content across platforms",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://*.facebook.com/*",
+    "*://*.twitter.com/*",
+    "*://*.x.com/*",
+    "*://*.instagram.com/*",
+    "*://*.linkedin.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/*",
+        "*://*.twitter.com/*",
+        "*://*.x.com/*",
+        "*://*.instagram.com/*",
+        "*://*.linkedin.com/*"
+      ],
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Social Media Manager"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
