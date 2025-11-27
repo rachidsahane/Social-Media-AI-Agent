@@ -1,108 +1,58 @@
-class AIService {
-    constructor() {
-        this.apiKey = null; // Initialize your API key
-        this.baseUrl = 'https://gemini.googleapis.com/v1'; // Base URL for Gemini API
-    }
+// --- CONFIGURATION API ---
+const API_KEY = "AIzaSyBNTrgAF20LcahV3BcFAQyjD57fo7ftoyg";
+const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent";
 
-    async getApiKey() {
-        if (!this.apiKey) {
-            const result = await chrome.storage.sync.get(['geminiApiKey']);
-            this.apiKey = result.geminiApiKey;
-        }
-        return this.apiKey;
-    }
+/**
+ * Fonction pour gérer l'appel à l'API Gemini.
+ * Elle est isolée des restrictions CSP de la page LinkedIn.
+ */
+async function callGeminiAPI(systemPrompt) {
+    console.log("Service Worker: Appel API en cours...");
+    try {
+        const payload = {
+            contents: [{
+                parts: [{ text: systemPrompt }]
+            }]
+        };
 
-    async generateComment(postContent, tone = 'friendly') {
-        const apiKey = await this.getApiKey();
-        if (!apiKey) {
-            throw new Error('API key not configured');
-        }
+        const response = await fetch(`${API_URL}?key=${API_KEY}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
 
-        const prompt = `Generate a ${tone} comment for this social media post: "${postContent}"`;
-
-        try {
-            const response = await fetch(`${this.baseUrl}/comments/generate`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${apiKey}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    prompt: prompt,
-                    max_tokens: 100,
-                    temperature: 0.7
-                })
-            });
-
-            if (!response.ok) {
-                throw new Error(`API request failed: ${response.status}`);
-            }
-
-            const data = await response.json();
-            return data.response; // Adjust based on Gemini's response format
-        } catch (error) {
-            console.error('Error generating comment:', error);
-            throw error;
-        }
-    }
-
-    async generatePostIdeas(topic, platform = 'general') {
-        const apiKey = await this.getApiKey();
-        if (!apiKey) {
-            throw new Error('API key not configured');
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error("Service Worker - Gemini API Error:", errorData);
+            throw new Error(`Gemini API returned status ${response.status}: ${JSON.stringify(errorData)}`);
         }
 
-        const prompt = `Generate 3 creative post ideas about "${topic}" for ${platform}.`;
+        const data = await response.json();
 
-        try {
-            const response = await fetch(`${this.baseUrl}/ideas/generate`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${apiKey}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    prompt: prompt,
-                    max_tokens: 300,
-                    temperature: 0.8
-                })
-            });
+        // On retourne le texte généré
+        return data.candidates[0].content.parts[0].text;
 
-            if (!response.ok) {
-                throw new Error(`API request failed: ${response.status}`);
-            }
-
-            const data = await response.json();
-            return data.response; // Adjust based on Gemini's response format
-        } catch (error) {
-            console.error('Error generating post ideas:', error);
-            throw error;
-        }
+    } catch (error) {
+        console.error("Service Worker - Fetch Error:", error.message);
+        // On retourne le message d'erreur pour qu'il soit affiché par content.js
+        return `Erreur: Impossible de contacter Gemini. (${error.message})`;
     }
 }
 
-// Initialize AIService
-const aiService = new AIService();
-// Handle messages from popup and content scripts
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.action === 'generateComment') {
-        aiService.generateComment(message.postContent, message.tone)
-            .then(comment => sendResponse({ success: true, comment }))
-            .catch(error => sendResponse({ success: false, error: error.message }));
-        return true; // Keep message channel open for async response
-    }
-    if (message.action === 'generatePostIdeas') {
-        aiService.generatePostIdeas(message.topic, message.platform)
-            .then(ideas => sendResponse({ success: true, ideas }))
-            .catch(error => sendResponse({ success: false, error: error.message }));
-        return true;
-    }
-    if (message.action === 'extractPostContent') {
-        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-            chrome.tabs.sendMessage(tabs[0].id, { action: 'extractContent' }, (response) => {
-                sendResponse(response);
+// Écoute des messages venant du Content Script (content.js)
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    // Si l'action est 'GENERATE_CONTENT', on appelle l'API
+    if (request.action === 'GENERATE_CONTENT') {
+        // Le Service Worker doit utiliser un return true et appeler sendResponse de manière asynchrone
+        callGeminiAPI(request.prompt)
+            .then(response => {
+                sendResponse({ success: true, text: response });
+            })
+            .catch(error => {
+                sendResponse({ success: false, text: error.message });
             });
-        });
+
+        // Indique que sendResponse sera appelé de manière asynchrone
         return true;
     }
 });

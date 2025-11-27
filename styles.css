@@ -1,0 +1,233 @@
+/* --- STYLES DU PLUGIN --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+/* Wrapper pour s'assurer que nos styles ne sont pas écrasés */
+.ai-assistant-wrapper {
+    font-family: 'Inter', sans-serif !important;
+    text-align: left;
+    line-height: normal;
+}
+
+/* L'icône flottante */
+.ai-trigger-icon {
+    position: absolute;
+    left: -50px;
+    top: 10px;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    z-index: 999;
+    color: white;
+}
+
+.ai-trigger-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 10px rgba(99, 102, 241, 0.3);
+}
+
+.ai-trigger-icon svg {
+    pointer-events: none;
+}
+
+/* Le panneau principal */
+.ai-panel {
+    position: absolute;
+    left: -320px;
+    top: 0;
+    width: 320px; /* Un peu plus large pour être confortable */
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    border: 1px solid #e5e7eb;
+    z-index: 10000; /* Très haut pour passer au dessus de tout */
+    overflow: hidden;
+    animation: slideIn 0.2s ease-out;
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Header */
+.ai-panel-header {
+    background: #f9fafb;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ai-panel-title {
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ai-close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #9ca3af;
+    padding: 4px;
+    border-radius: 4px;
+}
+.ai-close-btn:hover { color: #4b5563; background: #f3f4f6; }
+
+/* Liste des actions */
+.ai-action-list { padding: 8px; }
+
+.ai-action-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.1s;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.ai-action-item:hover {
+    background-color: #f3f4f6;
+    color: #111827;
+}
+
+.ai-action-icon { color: #6366f1; }
+
+/* Tone Selector */
+.ai-view-tone { padding: 16px; }
+
+.ai-tone-chip {
+    display: inline-block;
+    padding: 6px 12px;
+    background: #f3f4f6;
+    border-radius: 20px;
+    font-size: 12px;
+    margin: 4px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    color: #4b5563;
+}
+
+.ai-tone-chip:hover {
+    border-color: #6366f1;
+    background: #e0e7ff;
+    color: #4338ca;
+}
+
+.ai-tone-chip.selected {
+    background: #6366f1;
+    color: white;
+}
+
+/* Result View */
+.ai-result-view { padding: 16px; }
+
+.ai-response-box {
+    width: 100%;
+    min-height: 120px;
+    padding: 10px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #374151;
+    margin-bottom: 12px;
+    resize: vertical;
+    font-family: inherit;
+    box-sizing: border-box; /* Important pour pas déborder */
+}
+
+.ai-response-box:focus {
+    outline: 2px solid #6366f1;
+    border-color: transparent;
+}
+
+.ai-btn-primary {
+    background: #6366f1;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s;
+}
+
+.ai-btn-primary:hover { background: #4f46e5; }
+
+.ai-btn-secondary {
+    background: white;
+    border: 1px solid #d1d5db;
+    color: #374151;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ai-btn-secondary:hover { background: #f9fafb; }
+
+/* Spinner */
+.ai-spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #6366f1;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Utilitaires */
+.ai-helper-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.ai-link-btn {
+    background: none;
+    border: none;
+    font-size: 12px;
+    color: #6b7280;
+    text-decoration: underline;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    margin-top: 8px;
+}
+.ai-link-btn:hover { color: #111827; }
