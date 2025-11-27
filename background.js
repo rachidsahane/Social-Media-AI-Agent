@@ -1,5 +1,4 @@
 // --- CONFIGURATION API ---
-const API_KEY = "AIzaSyBNTrgAF20LcahV3BcFAQyjD57fo7ftoyg";
 const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent";
 
 /**
