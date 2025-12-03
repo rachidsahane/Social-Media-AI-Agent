@@ -12,9 +12,7 @@ const Icons = {
     check: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>`,
     lightbulb: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>`,
     penTool: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>`,
-    settings: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.09a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>`,
-    helpCircle: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>`,
-    trendingUp: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>`
+    settings: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.09a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>`
 };
 
 /**
@@ -56,29 +54,6 @@ class LinkedInAdapter {
         });
 
         return images;
-    }
-
-    getPostMetrics(el) {
-        const metrics = { likes: 0, comments: 0, shares: 0 };
-
-        // Try to find social counts button for likes
-        const socialCountsButton = el.querySelector('.social-details-social-counts__reactions-count, .social-details-social-counts__count-value');
-        if (socialCountsButton) {
-            const likesText = socialCountsButton.innerText.trim();
-            const likesMatch = likesText.match(/(\d+)/);
-            if (likesMatch) metrics.likes = parseInt(likesMatch[1]);
-        }
-
-        // Try to find comments count  
-        const commentsButton = el.querySelector('[data-test-id="social-actions__comments"]') ||
-            el.querySelector('.social-details-social-counts__comments');
-        if (commentsButton) {
-            const commentsText = commentsButton.innerText.trim();
-            const commentsMatch = commentsText.match(/(\d+)/);
-            if (commentsMatch) metrics.comments = parseInt(commentsMatch[1]);
-        }
-
-        return metrics;
     }
 }
 
@@ -129,12 +104,6 @@ class AIEngine {
                 break;
             case 'rewrite':
                 systemPrompt = Prompts.rewrite(contextData.draft, tone, userProfile);
-                break;
-            case 'ask_question':
-                systemPrompt = Prompts.ask_question(contextData.question, author, content);
-                break;
-            case 'competitive_analysis':
-                systemPrompt = Prompts.competitive_analysis(content, contextData.metrics || {}, contextData.authorProfile || author);
                 break;
             default:
                 systemPrompt = "Veuillez spécifier une action valide.";
@@ -235,7 +204,7 @@ class PostCreationManager {
 
         overlay.querySelector('.ai-close-overlay').addEventListener('click', () => document.body.removeChild(overlay));
 
-        // v3.0 FIX: Auto-focus input after render
+        // Fix: Auto-focus input after render
         setTimeout(() => input.focus(), 100);
     }
 
@@ -304,19 +273,14 @@ class PostCreationManager {
     insertTextIntoEditor(modal, text) {
         const editor = modal.querySelector('.ql-editor');
         if (editor) {
-            // v3.1 FIX: Clear and insert as HTML paragraphs
-            editor.innerHTML = '';
-
-            // Convert text to HTML paragraphs (preserve line breaks)
-            const paragraphs = text.split('\n').filter(p => p.trim());
-            const htmlContent = paragraphs.map(p => `<p>${p}</p>`).join('');
-
-            editor.innerHTML = htmlContent || '<p><br></p>';
+            // Fix: Clear existing content first
+            editor.innerText = '';
             editor.focus();
-
-            // Trigger events for LinkedIn
+            if (document.execCommand('insertText', false, text)) {
+                return;
+            }
+            editor.innerText = text;
             editor.dispatchEvent(new Event('input', { bubbles: true }));
-            editor.dispatchEvent(new Event('change', { bubbles: true }));
         }
     }
 }
@@ -334,7 +298,7 @@ class PluginManager {
     }
 
     init() {
-        console.log("LinkedIn AI Assistant v3.0: Démarrage...");
+        console.log("LinkedIn AI Assistant: Démarrage...");
 
         this.scanForPosts();
         this.scanForPostModal();
@@ -415,7 +379,7 @@ class PluginManager {
         panel.innerHTML = `
             <div class="ai-panel-header">
                 <span class="ai-panel-title">
-                    ${Icons.sparkles} Assistant IA v3.0
+                    ${Icons.sparkles} Assistant IA
                 </span>
                 <button class="ai-close-btn" id="ai-close-btn">
                     ${Icons.x}
@@ -454,14 +418,6 @@ class PluginManager {
                 <div class="ai-action-item" data-action="analyze">
                     <span class="ai-action-icon">${Icons.userSearch}</span>
                     Analyser le profil
-                </div>
-                <div class="ai-action-item" data-action="ask_question">
-                    <span class="ai-action-icon">${Icons.helpCircle}</span>
-                    Poser une question
-                </div>
-                <div class="ai-action-item" data-action="competitive_analysis">
-                    <span class="ai-action-icon">${Icons.trendingUp}</span>
-                    Analyse concurrentielle
                 </div>
                 <div class="ai-action-item" id="ai-settings-btn" style="border-top:1px solid #eee; margin-top:8px; padding-top:8px;">
                     <span class="ai-action-icon">${Icons.settings}</span>
@@ -519,37 +475,11 @@ class PluginManager {
     }
 
     handleActionSelection(action, container, postElement) {
-        if (action === 'ask_question') {
-            this.showQuestionInput(container, postElement);
-        } else if (action === 'competitive_analysis') {
-            this.executeAction(action, null, container, postElement);
-        } else if (['comment', 'dm'].includes(action)) {
+        if (['comment', 'dm'].includes(action)) {
             this.showToneSelector(container, action, postElement);
         } else {
             this.executeAction(action, null, container, postElement);
         }
-    }
-
-    showQuestionInput(container, postElement) {
-        container.innerHTML = `
-            <div class="ai-view-question">
-                <p style="font-size:12px; color:#666; margin-bottom:12px;">Posez votre question sur ce post :</p>
-                <textarea id="ai-question-input" placeholder="Ex: Quels sont les points clés de ce post ?" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; margin-bottom:12px; height:60px;"></textarea>
-                <button class="ai-btn-primary" id="ai-ask-btn" style="width:100%; margin-bottom:8px;">Demander à l'IA</button>
-                <button class="ai-link-btn" id="ai-back-btn">Retour</button>
-            </div>
-        `;
-
-        container.querySelector('#ai-back-btn').addEventListener('click', () => this.showMainMenu(container, postElement));
-
-        container.querySelector('#ai-ask-btn').addEventListener('click', () => {
-            const question = container.querySelector('#ai-question-input').value.trim();
-            if (!question) {
-                alert("Veuillez poser une question.");
-                return;
-            }
-            this.executeAction('ask_question', null, container, postElement, question);
-        });
     }
 
     showToneSelector(container, action, postElement) {
@@ -577,7 +507,7 @@ class PluginManager {
         });
     }
 
-    async executeAction(action, tone, container, postElement, additionalData = null) {
+    async executeAction(action, tone, container, postElement) {
         container.innerHTML = `
             <div style="text-align:center; padding:24px;">
                 <div class="ai-spinner"></div>
@@ -596,14 +526,6 @@ class PluginManager {
             userProfile: userProfile
         };
 
-        // Add action-specific data
-        if (action === 'ask_question' && additionalData) {
-            contextData.question = additionalData;
-        } else if (action === 'competitive_analysis') {
-            contextData.metrics = this.adapter.getPostMetrics(postElement);
-            contextData.authorProfile = this.adapter.getAuthorProfileUrl(postElement);
-        }
-
         try {
             const resultText = await AIEngine.generateResponse(action, contextData, tone);
             this.showResult(resultText, container, postElement);
@@ -612,26 +534,12 @@ class PluginManager {
         }
     }
 
-    // v3.1: Format markdown-style text to HTML
-    formatMarkdownToHTML(text) {
-        return text
-            .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') // Bold
-            .replace(/\*(.+?)\*/g, '<em>$1</em>') // Italic
-            .replace(/^### (.+)$/gm, '<h3 style="margin:8px 0; font-size:14px; font-weight:600;">$1</h3>') // H3
-            .replace(/^## (.+)$/gm, '<h2 style="margin:10px 0; font-size:16px; font-weight:600;">$1</h2>') // H2
-            .replace(/^# (.+)$/gm, '<h1 style="margin:12px 0; font-size:18px; font-weight:600;">$1</h1>') // H1
-            .replace(/^- (.+)$/gm, '<li style="margin-left:20px;">$1</li>') // List items
-            .replace(/\n/g, '<br>'); // Line breaks
-    }
-
     showResult(text, container, postElement) {
         const display = text.startsWith("Erreur:") ? text : text.trim();
-        const formattedDisplay = this.formatMarkdownToHTML(display);
 
         container.innerHTML = `
             <div class="ai-result-view">
-                <div class="ai-response-box" style="white-space: pre-wrap; padding: 12px; border: 1px solid #ccc; border-radius: 4px; background: #f9f9f9; max-height: 400px; overflow-y: auto; font-family: inherit; line-height: 1.6;">${formattedDisplay}</div>
-            <textarea id="ai-hidden-textarea" style="position: absolute; left: -9999px;">${display}</textarea>
+                <textarea class="ai-response-box">${display}</textarea>
                 <div style="display:flex; gap:8px;">
                     <button class="ai-btn-primary" id="ai-copy-btn" ${display.startsWith("Erreur:") ? 'disabled' : ''}>
                         ${Icons.copy} Copier
@@ -644,211 +552,15 @@ class PluginManager {
             </div>
         `;
 
-        const hiddenTextarea = container.querySelector('#ai-hidden-textarea');
-        const displayDiv = container.querySelector('.ai-response-box');
+        const textarea = container.querySelector('textarea');
         const copyBtn = container.querySelector('#ai-copy-btn');
 
         if (display.startsWith("Erreur:")) {
-            displayDiv.style.color = "#dc2626";
+            textarea.style.color = "#dc2626";
         }
 
         copyBtn.addEventListener('click', () => {
-            hiddenTextarea.select();
-            document.execCommand('copy');
-
-            const originalContent = copyBtn.innerHTML;
-            copyBtn.innerHTML = `${Icons.check} Copié !`;
-            copyBtn.style.background = "#059669";
-
-            setTimeout(() => {
-                copyBtn.innerHTML = originalContent;
-                copyBtn.style.background = "#6366f1";
-            }, 2000);
-        });
-        container.querySelectorAll('.ai-action-item:not(#ai-settings-btn)').forEach(item => {
-            item.addEventListener('click', () => {
-                const action = item.dataset.action;
-                this.handleActionSelection(action, container, postElement);
-            });
-        });
-
-        container.querySelector('#ai-settings-btn').addEventListener('click', () => {
-            this.openSettingsModal();
-        });
-    }
-
-    async openSettingsModal() {
-        const profile = await this.userProfileManager.getProfile();
-        const overlay = this.postCreationManager.createOverlay('Mon Profil IA');
-
-        overlay.innerHTML += `
-            <div style="padding: 16px;">
-                <p style="font-size:12px; color:#666; margin-bottom:12px;">Ces informations aideront l'IA à personnaliser vos réponses.</p>
-                
-                <label style="display:block; margin-bottom:4px; font-weight:600;">Nom complet</label>
-                <input type="text" id="ai-profile-name" class="ai-input" value="${profile.name || ''}" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; margin-bottom:12px;">
-
-                <label style="display:block; margin-bottom:4px; font-weight:600;">Titre / Expertise</label>
-                <input type="text" id="ai-profile-title" class="ai-input" value="${profile.title || ''}" placeholder="Ex: Expert Marketing Digital" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; margin-bottom:12px;">
-
-                <label style="display:block; margin-bottom:4px; font-weight:600;">Sujets de prédilection</label>
-                <textarea id="ai-profile-topics" class="ai-input" placeholder="Ex: Tech, Startup, Management..." style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; margin-bottom:16px; height:60px;">${profile.topics || ''}</textarea>
-
-                <button id="ai-save-profile-btn" class="ai-btn-primary" style="width:100%;">Enregistrer</button>
-            </div>
-        `;
-        document.body.appendChild(overlay);
-
-        overlay.querySelector('#ai-save-profile-btn').addEventListener('click', async () => {
-            const newProfile = {
-                name: overlay.querySelector('#ai-profile-name').value,
-                title: overlay.querySelector('#ai-profile-title').value,
-                topics: overlay.querySelector('#ai-profile-topics').value
-            };
-            await this.userProfileManager.saveProfile(newProfile);
-            alert("Profil enregistré !");
-            document.body.removeChild(overlay);
-        });
-
-        overlay.querySelector('.ai-close-overlay').addEventListener('click', () => document.body.removeChild(overlay));
-    }
-
-    handleActionSelection(action, container, postElement) {
-        if (action === 'ask_question') {
-            this.showQuestionInput(container, postElement);
-        } else if (action === 'competitive_analysis') {
-            this.executeAction(action, null, container, postElement);
-        } else if (['comment', 'dm'].includes(action)) {
-            this.showToneSelector(container, action, postElement);
-        } else {
-            this.executeAction(action, null, container, postElement);
-        }
-    }
-
-    showQuestionInput(container, postElement) {
-        container.innerHTML = `
-            <div class="ai-view-question">
-                <p style="font-size:12px; color:#666; margin-bottom:12px;">Posez votre question sur ce post :</p>
-                <textarea id="ai-question-input" placeholder="Ex: Quels sont les points clés de ce post ?" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; margin-bottom:12px; height:60px;"></textarea>
-                <button class="ai-btn-primary" id="ai-ask-btn" style="width:100%; margin-bottom:8px;">Demander à l'IA</button>
-                <button class="ai-link-btn" id="ai-back-btn">Retour</button>
-            </div>
-        `;
-
-        container.querySelector('#ai-back-btn').addEventListener('click', () => this.showMainMenu(container, postElement));
-
-        container.querySelector('#ai-ask-btn').addEventListener('click', () => {
-            const question = container.querySelector('#ai-question-input').value.trim();
-            if (!question) {
-                alert("Veuillez poser une question.");
-                return;
-            }
-            this.executeAction('ask_question', null, container, postElement, question);
-        });
-    }
-
-    showToneSelector(container, action, postElement) {
-        const tones = ['Professionnel', 'Amical', 'Humoristique', 'Contradictoire', 'Inspirant'];
-
-        let html = `
-            <div class="ai-view-tone">
-                <span class="ai-helper-text">Choisir le ton</span>
-                <div style="display:flex; flex-wrap:wrap; margin-bottom:12px;">
-                    ${tones.map(t => `<span class="ai-tone-chip" data-tone="${t}">${t}</span>`).join('')}
-                </div>
-                <button class="ai-link-btn" id="ai-back-btn">Retour</button>
-            </div>
-        `;
-        container.innerHTML = html;
-
-        container.querySelector('#ai-back-btn').addEventListener('click', () => this.showMainMenu(container, postElement));
-
-        container.querySelectorAll('.ai-tone-chip').forEach(chip => {
-            chip.addEventListener('click', () => {
-                container.querySelectorAll('.ai-tone-chip').forEach(c => c.classList.remove('selected'));
-                chip.classList.add('selected');
-                this.executeAction(action, chip.dataset.tone, container, postElement);
-            });
-        });
-    }
-
-    async executeAction(action, tone, container, postElement, additionalData = null) {
-        container.innerHTML = `
-            <div style="text-align:center; padding:24px;">
-                <div class="ai-spinner"></div>
-                <p style="font-size:12px; color:#6b7280; margin-top:12px;">L'IA analyse le post...</p>
-            </div>
-        `;
-
-        // Fetch profile
-        const userProfile = await this.userProfileManager.getProfile();
-
-        const contextData = {
-            author: this.adapter.getAuthorName(postElement),
-            content: this.adapter.getPostContent(postElement),
-            url: this.adapter.getAuthorProfileUrl(postElement),
-            images: this.adapter.getPostImages(postElement),
-            userProfile: userProfile
-        };
-
-        // Add action-specific data
-        if (action === 'ask_question' && additionalData) {
-            contextData.question = additionalData;
-        } else if (action === 'competitive_analysis') {
-            contextData.metrics = this.adapter.getPostMetrics(postElement);
-            contextData.authorProfile = this.adapter.getAuthorProfileUrl(postElement);
-        }
-
-        try {
-            const resultText = await AIEngine.generateResponse(action, contextData, tone);
-            this.showResult(resultText, container, postElement);
-        } catch (error) {
-            this.showResult(`Erreur: ${error.message}. Veuillez vérifier la console du Service Worker pour plus de détails.`, container, postElement);
-        }
-    }
-
-    // v3.1: Format markdown-style text to HTML
-    formatMarkdownToHTML(text) {
-        return text
-            .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') // Bold
-            .replace(/\*(.+?)\*/g, '<em>$1</em>') // Italic
-            .replace(/^### (.+)$/gm, '<h3 style="margin:8px 0; font-size:14px; font-weight:600;">$1</h3>') // H3
-            .replace(/^## (.+)$/gm, '<h2 style="margin:10px 0; font-size:16px; font-weight:600;">$1</h2>') // H2
-            .replace(/^# (.+)$/gm, '<h1 style="margin:12px 0; font-size:18px; font-weight:600;">$1</h1>') // H1
-            .replace(/^- (.+)$/gm, '<li style="margin-left:20px;">$1</li>') // List items
-            .replace(/\n/g, '<br>'); // Line breaks
-    }
-
-    showResult(text, container, postElement) {
-        const display = text.startsWith("Erreur:") ? text : text.trim();
-        const formattedDisplay = this.formatMarkdownToHTML(display);
-
-        container.innerHTML = `
-            <div class="ai-result-view">
-                <div class="ai-response-box" style="white-space: pre-wrap; padding: 12px; border: 1px solid #ccc; border-radius: 4px; background: #f9f9f9; max-height: 400px; overflow-y: auto; font-family: inherit; line-height: 1.6;">${formattedDisplay}</div>
-            <textarea id="ai-hidden-textarea" style="position: absolute; left: -9999px;">${display}</textarea>
-                <div style="display:flex; gap:8px;">
-                    <button class="ai-btn-primary" id="ai-copy-btn" ${display.startsWith("Erreur:") ? 'disabled' : ''}>
-                        ${Icons.copy} Copier
-                    </button>
-                    <button class="ai-btn-secondary" id="ai-retry-btn" title="Recommencer">
-                        ${Icons.refresh}
-                    </button>
-                </div>
-                <button class="ai-link-btn" id="ai-home-btn">Nouvelle action</button>
-            </div>
-        `;
-
-        const hiddenTextarea = container.querySelector('#ai-hidden-textarea');
-        const displayDiv = container.querySelector('.ai-response-box');
-        const copyBtn = container.querySelector('#ai-copy-btn');
-
-        if (display.startsWith("Erreur:")) {
-            displayDiv.style.color = "#dc2626";
-        }
-
-        copyBtn.addEventListener('click', () => {
-            hiddenTextarea.select();
+            textarea.select();
             document.execCommand('copy');
 
             const originalContent = copyBtn.innerHTML;
@@ -877,25 +589,3 @@ setTimeout(() => {
     const manager = new PluginManager(linkedInAdapter);
     manager.init();
 }, 2000);
-
-// v3.2: Initialize Bulk Analyzer for Company/Person Pages
-if (window.location.hostname.includes('linkedin.com')) {
-    // Monitor page type changes (LinkedIn is SPA)
-    setInterval(() => {
-        // Ensure BulkAnalyzer is available before using it
-        if (typeof BulkAnalyzer !== 'undefined') {
-            const pageType = BulkAnalyzer.detectPageType();
-            if (pageType) {
-                BulkAnalyzer.maybeInjectButton(pageType);
-            } else {
-                // Not on company/person page, remove button if exists
-                const existingButton = document.getElementById('ai-bulk-analyze-btn');
-                if (existingButton) {
-                    existingButton.remove();
-                    BulkAnalyzer.buttonInjected = false;
-                    BulkAnalyzer.currentPageType = null;
-                }
-            }
-        }
-    }, 2000);
-}

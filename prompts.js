@@ -100,6 +100,90 @@ Brouillon original :
 "${content}"
 
 Garde le même sens mais améliore le style, la clarté et l'impact.`,
+
+    ask_question: (question, author, content) => `Tu es un assistant IA expert en analyse de contenu LinkedIn.
+Un utilisateur a une question spécifique sur ce post :
+
+Auteur : ${author}
+Post : "${content}"
+
+Question de l'utilisateur : "${question}"
+
+Réponds de manière COURTE et PRÉCISE (maximum 100 mots). Va droit au but.`,
+
+    competitive_analysis: (postData, metrics, authorProfile) => `Tu es un expert en stratégie de contenu LinkedIn et en analyse de performance.
+
+Analyse ce post de manière approfondie :
+
+AUTEUR : ${authorProfile || 'Non disponible'}
+POST : "${postData}"
+MÉTRIQUES :
+- Likes : ${metrics.likes || 0}
+- Commentaires : ${metrics.comments || 0}
+- Partages : ${metrics.shares || 0}
+
+Ta mission :
+1. Détermine pourquoi ce post a fonctionné (ou échoué)
+2. Identifie les éléments clés de succès ou d'échec
+3. Propose 3 stratégies concrètes pour s'en inspirer ou l'améliorer
+
+Structure :
+✅ Ce qui a marché / ❌ Ce qui n'a pas marché
+💡 3 Stratégies d'adaptation
+
+Sois concret, actionnable et basé sur les données.`,
+
+    // v3.2: Bulk Analysis Prompts
+    company_bulk_analysis: (posts) => `Vous êtes un expert en analyse de stratégie de contenu LinkedIn.
+
+Analysez ces derniers posts de cette entreprise et fournissez une analyse complète:
+
+**📊 Vue d'ensemble**
+- Fréquence de publication estimée
+- Types de contenu dominants (texte, image, vidéo, article)
+- Ton général de la communication
+
+**🎯 Thèmes récurrents**
+- Quels sujets sont le plus abordés?
+- Quelle est la stratégie éditoriale apparente?
+
+**📈 Performance globale**
+- Engagement moyen (likes, commentaires)
+- Quel type de post performe le mieux?
+- Tendances observées
+
+**💡 Recommandations stratégiques**
+- Points forts à maintenir
+- Axes d'amélioration concrets
+- Suggestions de contenu innovant
+
+${posts}`,
+
+    person_bulk_analysis: (posts) => `Vous êtes un expert en personal branding sur LinkedIn.
+
+Analysez ces derniers posts de ce profil et fournissez une analyse approfondie:
+
+**👤 Identité professionnelle**
+- Positionnement et expertise mis en avant
+- Ton de communication (professionnel, inspirant, technique, etc.)
+- Cohérence du message
+
+**📝 Style de contenu**
+- Formats privilégiés (stories, conseils, actualités, analyses, etc.)
+- Longueur et structure typiques des posts
+- Utilisation d'émojis, hashtags, mentions
+
+**👥 Engagement communauté**
+- Niveau d'interaction moyen
+- Type d'audience qui réagit le plus
+- Sujets qui génèrent le plus d'engagement
+
+**🚀 Stratégie de personal branding**
+- Points forts du personal branding
+- Opportunités d'amélioration
+- Suggestions pour renforcer la présence
+
+${posts}`
 };
 
 // Export for use in content.js (since we are in a Chrome Extension environment, we can just attach it to window or rely on order of execution, but let's just leave it as a global const for now which will be accessible if loaded before content.js)

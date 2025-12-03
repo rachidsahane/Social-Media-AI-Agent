@@ -1,70 +1,45 @@
-# LinkedIn AI Assistant Plugin (v2)
+# LinkedIn AI Assistant
 
-Lightweight Chrome extension content script that injects an AI assistant into LinkedIn posts and the post composer. Helps with:
-- Writing comments
-- Generating post ideas
-- Rewriting drafts with different tones
-- Summarizing posts
-- Writing direct messages (DMs)
-- Simple profile analysis and prompts personalization
+AI-powered Chrome extension for LinkedIn, powered by Google Gemini.
 
-Status: Version 2 — currently only supports `LinkedIn`.
+## Setup Instructions
 
-Main files:
-- `content.js` — UI injection, DOM adapter for LinkedIn, actions and UI flows.
-- Service worker / background script — handles calls to the AI service (via `chrome.runtime.sendMessage` with action `GENERATE_CONTENT`).
-- `api_key.js` (user-provided; must not be committed).
+1. **Clone the repository**
+   ```bash
+   git clone <your-repo-url>
+   cd smm-plugin
+   ```
 
-Features overview
-- Floating AI trigger per post (brain icon) to open a small assistant panel.
-- Tone selector for comments and DMs.
-- Post composer toolbar additions: generate post ideas and rewrite drafts.
-- Profile settings UI to store contextual info used by the AI.
-- Uses `chrome.storage.local` for storing user profile data.
+2. **Configure your API Key**
+   - Copy `api_key.example.js` to `api_key.js`
+   - Open `api_key.js` and replace `YOUR_GEMINI_API_KEY_HERE` with your actual Gemini API key
+   - ⚠️ **IMPORTANT**: `api_key.js` is gitignored and will NOT be committed to prevent exposing your key
 
-Requirements
-- Chrome (or Chromium-based browser) with extension support.
-- An API key from AI Studio: https://aistudio.google.com/
-- Developer mode to load the unpacked extension for testing.
+3. **Load the extension in Chrome**
+   - Go to `chrome://extensions/`
+   - Enable "Developer mode" (top right)
+   - Click "Load unpacked"
+   - Select the `smm-plugin` folder
+   - Reload LinkedIn
 
-Quick setup
-1. Clone the repo.
-2. Create `api_key.js` in the project root (see the snippet below).
-3. Add `api_key.js` to ` .gitignore` (to avoid committing your key).
-4. Load the extension in Chrome via Extensions > Load unpacked and select the project folder.
-5. Open LinkedIn, wait a couple seconds for the content script to inject UI, then use the assistant.
+## Features
 
-API key setup
-- Get an API key from: https://aistudio.google.com/
-- Create a file named `api_key.js` in the project root and put your key there.
-- Add `api_key.js` to ` .gitignore` to keep it out of the repository.
+### Version 2.0
+- 🧠 **AI Post Analysis** - Analyze posts with multimodal support (text + images)
+- ✍️ **Content Creation**
+  - Generate post ideas from topics
+  - Rewrite and optimize drafts
+- 👤 **Personalization** - Save your profile to get personalized AI responses
+- 💬 **Smart Comments** - Generate engaging comments with different tones
+- 📊 **Post Summaries** - Get structured summaries of posts
+- 💌 **DM Generation** - Create personalized direct messages
 
-Explanation: `api_key.js` simply stores your key in a constant. Import this file from your service worker or background script that performs AI requests, and pass the key to the API client.
+## Security
 
-```javascript
-// javascript
-// Create `api_key.js` in the project root (DO NOT COMMIT).
-// Replace 'YOUR_API_KEY_HERE' with the key from https://aistudio.google.com/
-const API_KEY = 'YOUR_API_KEY_HERE';
-export default API_KEY;
-```
+- API keys are stored in `api_key.js` which is **gitignored**
+- Never commit `api_key.js` to version control
+- Only `api_key.example.js` (template) is tracked by git
 
-Development notes
-- The content script implements an adapter pattern for LinkedIn (`LinkedInAdapter`) to extract author, content, images and profile URL from posts.
-- UI and workflows are in `content.js`; AI generation requests are proxied via `chrome.runtime.sendMessage({ action: 'GENERATE_CONTENT', ... })` to the background/service worker which should call the AI API.
-- User profile data saved via `chrome.storage.local` (managed by `UserProfileManager`).
+## License
 
-Security and privacy
-- Never commit `api_key.js` or your API key.
-- Stored user profile data is saved locally via Chrome storage.
-
-Troubleshooting
-- If the assistant doesn't appear, open the console on LinkedIn and verify `content.js` logs and that the extension is loaded.
-- Check the Service Worker console for failures to call the AI API (the extension sends messages and logs errors).
-
-Contributing
-- Follow project coding style and test on LinkedIn.
-- Keep UI injection minimal to avoid breaking LinkedIn layout.
-
-Version
-- v2 — LinkedIn only.
+MIT

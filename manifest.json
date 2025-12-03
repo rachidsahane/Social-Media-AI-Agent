@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "LinkedIn AI Assistant",
-  "version": "2.0",
+  "version": "3.2.2",
   "description": "Assistant IA pour LinkedIn propulsé par Gemini",
   "permissions": [
     "activeTab",
@@ -14,7 +14,8 @@
     "https://generativelanguage.googleapis.com/*"
   ],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
   "content_scripts": [
     {
@@ -26,8 +27,8 @@
       ],
       "js": [
         "prompts.js",
-        "content.js",
-        "api_key.js"
+        "bulk_analyzer.js",
+        "content.js"
       ],
       "run_at": "document_idle"
     }

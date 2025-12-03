@@ -1,4 +1,7 @@
 // --- CONFIGURATION API ---
+// IMPORTANT: Create api_key.js from api_key.example.js with your actual key
+import { API_KEY } from './api_key.js';
+
 const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent";
 
 /**
