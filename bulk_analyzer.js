@@ -170,7 +170,7 @@ Commentaires: ${post.comments}
             // Call AI via background script
             const response = await new Promise((resolve, reject) => {
                 chrome.runtime.sendMessage({
-                    action: 'generateAI',
+                    action: 'GENERATE_CONTENT',
                     prompt: fullPrompt
                 }, (response) => {
                     if (chrome.runtime.lastError) {

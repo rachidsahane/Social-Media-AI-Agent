@@ -24,6 +24,16 @@ AI-powered Chrome extension for LinkedIn, powered by Google Gemini.
 
 ## Features
 
+### Version 3.2.2 (New!)
+- 🏢 **Company Post Analysis** - Analyze the last 5 posts of any company page (Strategy, Themes, Performance)
+- 👤 **Person Post Analysis** - Analyze the last 5 posts of any profile (Personal Branding, Style, Engagement)
+- 🚀 **Bulk Analysis Engine** - New floating button on company and profile pages
+
+### Version 3.0
+- ❓ **Ask Question** - Ask specific questions about any post
+- ⚔️ **Competitive Analysis** - Analyze why a post performed well (or failed)
+- 🐛 **Bug Fixes** - Improved editor integration and markdown rendering
+
 ### Version 2.0
 - 🧠 **AI Post Analysis** - Analyze posts with multimodal support (text + images)
 - ✍️ **Content Creation**
